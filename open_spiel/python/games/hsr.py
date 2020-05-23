@@ -146,40 +146,14 @@ class HSRState(object):
 
   def apply_action(self, action):
     """Applies the specified action to the state."""
-    # self._board[self.coord(action)] = "x" if self._cur_player == 0 else "o"
 
     if self._cur_player == 1 and action == 1:
-
       self.EFG_ANDR()
-      # self._history.append("R - EFG_AND(" + str(self._remaining_jars)
-      #                      + ", " + str(self._remaining_questions) + ", " + str(self._num_of_rungs) + ", " + str(self._hsr_guess) + " )")
-      #
-      # self._remaining_questions -= 1
-      # self._num_of_rungs = self._num_of_rungs - self._hsr_guess
-      #
-      # self._board[self.coord(self._hsr_guess-1)] = "0"
-      #
-      # start = self._hsr_guess -1
-      # while(start > 0):
-      #   self._board[self.coord(start-1)] = "x"
-      #   start = start - 1
     elif self._cur_player == 1 and action == 0:
-
-        self.EFG_ANDL()
-       # for index in range(self._hsr_guess, _NUM_CELLS+1):
-       #   self._board[self.coord(index-1)] = "x"
-       #
-       # self._history.append("L - EFG_AND(" + str(self._remaining_jars)
-       #                      + ", " + str(self._remaining_questions) + ", " + str(self._num_of_rungs) + ", " + str(
-       #   self._hsr_guess) + " )")
-       # self._remaining_questions -= 1
-       # self._num_of_rungs = self._hsr_guess
-       # self._remaining_jars -= 1
+      self.EFG_ANDL()
 
     if self._cur_player == 0:
-      self._hsr_guess = action
-      self._history.append("Exists(" + str(self._remaining_jars)
-                           + ", " + str(self._remaining_questions) + ", " + str(self._num_of_rungs) + " )")
+      self.Exists(action)
 
     if self.line_exists():
       self._is_terminal = True
@@ -212,6 +186,12 @@ class HSRState(object):
     self._remaining_questions -= 1
     self._num_of_rungs = self._hsr_guess
     self._remaining_jars -= 1
+
+  def Exists(self, action):
+    self._hsr_guess = action
+    self._history.append("Exists(" + str(self._remaining_jars)
+                         + ", " + str(self._remaining_questions) + ", " + str(self._num_of_rungs) + " )")
+
 
   def undo_action(self, action):
     # Optional function. Not used in many places.
