@@ -22,37 +22,37 @@ from open_spiel.python.games import hsr
 
 class HSRTest(absltest.TestCase):
 
-  def test_create(self):
-    game = hsr.HSRGame()
-    print(game.num_distinct_actions())
-    clone = game.clone()
-    print(clone.num_distinct_actions())
-    state = game.new_initial_state()
-    clone = state.clone()
-    print(state)
-    print(clone)
+    def test_create(self):
+        game = hsr.HSRGame()
+        print(game.num_distinct_actions())
+        clone = game.clone()
+        print(clone.num_distinct_actions())
+        state = game.new_initial_state()
+        clone = state.clone()
+        print(state)
+        print(clone)
 
-  def test_random_game(self):
-    # This is here mostly to show the API by example.
-    # More serious simulation tests are done in python/tests/game_sim_test.py.
-    # Those test the conformance to the API thoroughly.
-    game = hsr.HSRGame()
-    state = game.new_initial_state()
-    while not state.is_terminal():
-      print(state)
-      cur_player = state.current_player()
-      legal_actions = state.legal_actions()
-      action = np.random.choice(legal_actions)
-      if cur_player == 1:
-        print("Player {} chooses action {}".format(cur_player, "R" if action == 1 else "L"))
-      else:
-        print("Player {} chooses action {}".format(cur_player, action))
+    def test_random_game(self):
+        # This is here mostly to show the API by example.
+        # More serious simulation tests are done in python/tests/game_sim_test.py.
+        # Those test the conformance to the API thoroughly.
+        game = hsr.HSRGame()
+        state = game.new_initial_state()
+        while not state.is_terminal():
+            print(state)
+            cur_player = state.current_player()
+            legal_actions = state.legal_actions()
+            action = np.random.choice(legal_actions)
+            if cur_player == 1:
+                print("Player {} chooses action {}".format(cur_player, "R" if action == 1 else "L"))
+            else:
+                print("Player {} chooses action {}".format(cur_player, action))
 
-      state.apply_action(action)
-    print(state)
-    print(state.history())
-    print("Returns: {}".format(state.returns()))
+            state.apply_action(action)
+        print(state)
+        print(state.history())
+        print("Returns: {}".format(state.returns()))
 
 
 if __name__ == "__main__":
-  absltest.main()
+    absltest.main()
