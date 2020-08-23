@@ -54,7 +54,7 @@ class PyspielTest(absltest.TestCase):
         "goofspiel",
         "havannah",
         "hex",
-        "HSR",
+        "hsr",
         "kuhn_poker",
         "laser_tag",
         "leduc_poker",

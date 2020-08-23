@@ -16,15 +16,15 @@
 #include "open_spiel/tests/basic_tests.h"
 
 namespace open_spiel {
-namespace tic_tac_toe {
+namespace hsr {
 namespace {
 
 namespace testing = open_spiel::testing;
 
-void BasicTicTacToeTests() {
-  testing::LoadGameTest("tic_tac_toe");
-  testing::NoChanceOutcomesTest(*LoadGame("tic_tac_toe"));
-  testing::RandomSimTest(*LoadGame("tic_tac_toe"), 100);
+void BasicHsrTests() {
+  testing::LoadGameTest("hsr");
+  testing::NoChanceOutcomesTest(*LoadGame("hsr"));
+  testing::RandomSimTest(*LoadGame("hsr"), 100);
 }
 
 }  // namespace
@@ -32,5 +32,5 @@ void BasicTicTacToeTests() {
 }  // namespace open_spiel
 
 int main(int argc, char** argv) {
-  open_spiel::tic_tac_toe::BasicTicTacToeTests();
+  open_spiel::hsr::BasicHsrTests();
 }

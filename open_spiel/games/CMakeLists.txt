@@ -51,8 +51,8 @@ set(GAME_SOURCES
   havannah.h
   hex.cc
   hex.h
-  HSR.cc
-  HSR.h
+  hsr.cc
+  hsr.h
   kuhn_poker.cc
   kuhn_poker.h
   laser_tag.cc
@@ -262,9 +262,9 @@ add_executable(hex_test hex_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>)
 add_test(hex_test hex_test)
 
-add_executable(HSR_test HSR_test.cc ${OPEN_SPIEL_OBJECTS}
+add_executable(hsr_test hsr_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>)
-add_test(HSR_test HSR_test)
+add_test(hsr_test hsr_test)
 
 add_executable(kuhn_poker_test kuhn_poker_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>

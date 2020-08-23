@@ -23,22 +23,22 @@
 
 #include "open_spiel/spiel.h"
 
-// Simple game of Noughts and Crosses:
+// Game to estimate Highest safe rung:
 //
 // Parameters: none
 
 namespace open_spiel {
-namespace HSR {
+namespace hsr {
 
 // Constants.
 inline constexpr int kNumPlayers = 2;
-inline constexpr int kNumRows = 3;
-inline constexpr int kNumCols = 3;
+inline constexpr int kNumRows = 1;
+inline constexpr int kNumCols = 7;
 inline constexpr int kNumCells = kNumRows * kNumCols;
-inline constexpr int kCellStates = 1 + kNumPlayers;  // empty, 'x', and 'o'.
+inline constexpr int kCellStates = 1 + kNumPlayers; // empty, 'x', and 'o'.
 
 // https://math.stackexchange.com/questions/485752/tictactoe-state-space-choose-calculation/485852
-inline constexpr int kNumberStates = 5478;
+inline constexpr int kNumberStates = 700;
 
 // State of a cell.
 enum class CellState {
@@ -77,13 +77,23 @@ class HSRState : public State {
  protected:
   std::array<CellState, kNumCells> board_;
   void DoApplyAction(Action move) override;
+  bool PWin() const;
+  bool OWin() const;
 
  private:
   bool HasLine(Player player) const;  // Does this player have a line?
-  bool IsFull() const;                // Is the board full?
+  void EFG_ANDR();
+  void EFG_ANDL();
+  void Exists(Action move);
+
   Player current_player_ = 0;         // Player zero goes first
   Player outcome_ = kInvalidPlayer;
+
   int num_moves_ = 0;
+  int hsr_guess = -1;
+  int kNumQuestions = 3;
+  int kNumRungs = 7;
+  int kNumJars = 2;
 };
 
 // Game object.
@@ -107,14 +117,14 @@ class HSRGame : public Game {
   int MaxGameLength() const override { return kNumCells; }
 };
 
-CellState PlayerToState(Player player);
+std::string PlayerToState(Player player);
 std::string StateToString(CellState state);
 
 inline std::ostream& operator<<(std::ostream& stream, const CellState& state) {
   return stream << StateToString(state);
 }
 
-}  // namespace HSR
+}  // namespace hsr
 }  // namespace open_spiel
 
 #endif  // OPEN_SPIEL_GAMES_HSR_H_
